@@ -17,9 +17,10 @@ from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
     eq = LagrangianBasis(x, degreeOfPolynomial=5, pointAt=0)
 ```
 
-```math
+<!-- ```math
 \frac{(x - x_1)(x - x_2)(x - x_3)(x - x_4)(x - x_5)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)(x_0 - x_4)(x_0 - x_5)}
-```
+``` -->
+<img src="https://render.githubusercontent.com/render/math?math=\frac{(x - x_1)(x - x_2)(x - x_3)(x - x_4)(x - x_5)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)(x_0 - x_4)(x_0 - x_5)}">
 
 ## Lagrangian Polynomial
 
@@ -37,9 +38,10 @@ Given a set of data \((x_0, f_0), (x_1, f_1), (x_2, f_2)\) where \((x_0, x_1, x_
 
 We get `f0*x*(-dx + x)/(2*dx**2) - f1*(-dx + x)*(dx + x)/dx**2 + f2*x*(dx + x)/(2*dx**2)` corresponding to
 
-```math
+<!-- ```math
 f_0\frac{x(x -\varDelta x)}{2\varDelta x^2} - f_1\frac{(x - \varDelta x)(x+\varDelta x)}{\varDelta x^2} + f_2\frac{x(\varDelta x + x)}{2\varDelta x^2}
-```
+``` -->
+<img src="https://render.githubusercontent.com/render/math?math=f_0\frac{x(x -\varDelta x)}{2\varDelta x^2} - f_1\frac{(x - \varDelta x)(x+\varDelta x)}{\varDelta x^2} + f_2\frac{x(\varDelta x + x)}{2\varDelta x^2}">
 
 ## Finite Difference Equation
 ### 3-point stencil 1st order central difference on the regular grid
@@ -54,9 +56,10 @@ Given a set of data \((x_0, f_0), (x_1, f_1), (x_2, f_2)\) where \((x_0, x_1, x_
 
 We get `(-f0 + f2)/(2*dx)` corresponding to well known expression
 
-```math
+<!-- ```math
 \frac{f_2-f_0}{2\varDelta x}
-```
+``` -->
+<img src="https://render.githubusercontent.com/render/math?math=\frac{f_2-f_0}{2\varDelta x}">
 
 ### 3-point stencil 1st order central difference on the staggered grid
 
