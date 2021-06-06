@@ -1,0 +1,2 @@
+# Symbolic_Lagrangian_Polynomial_and_Finite_Difference
+a python script to symbolically construct Lagrange polynomials and finite difference equations
