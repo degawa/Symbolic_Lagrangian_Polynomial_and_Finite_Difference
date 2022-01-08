@@ -16,20 +16,20 @@ def createSetOfFunctionSymbolsAtXSet(xSet, functionSymbol=_DefaultFunctionSymbol
 
 
 def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
-                                intervalSymbol=_DefaultIntervalSymbol,
-                                x=sp.symbols(_DefaultIndependentVariableSymbol)):
+                                intervalSymbol=_DefaultIntervalSymbol):
     xSet = createXSetFromStencil(stencil, intervalSymbol)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbol)
 
+    x = sp.symbols(_DefaultIndependentVariableSymbol)
     return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1,
-                                    intervalSymbol=_DefaultIntervalSymbol,
-                                    x=sp.symbols(_DefaultIndependentVariableSymbol)):
+                                    intervalSymbol=_DefaultIntervalSymbol):
     xSet = createXSetFromStencil(stencil, intervalSymbol)
-
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbol)
+
+    x = sp.symbols(_DefaultIndependentVariableSymbol)
     num, den = lp.LagrangianPoly(x, xSet, fSet).as_numer_denom()
     num_coef = num.as_poly(fSet).coeffs()
     den_coef = den.as_poly(fSet).coeffs()
