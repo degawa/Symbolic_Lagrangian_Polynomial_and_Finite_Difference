@@ -2,15 +2,16 @@
 a python script to symbolically construct Lagrange polynomials and finite difference equations
 
 # Usage
-donwload lagrangianpoly.py and SymbolicFiniteDifference.py and import it like below:
+donwload lagrangianpoly.py, SymbolicFiniteDifference.py, and TaylorExpansion.py and import those like below:
 
 ```Python
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
 import SymbolicFiniteDifference as fd
+import TaylorExpansion as te
 ```
 
 # Todo
-- [ ] add comments
+- [ ] add comments and docstrings
 - [ ] add comprehensive test
 - [ ] packaging according to Python manner
 
@@ -146,3 +147,66 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 ```
 
 `[2, -5, 4, -1]`
+
+## TaylorExpansion
+### TaylorExpansion
+
+#### f(x+h) around x up to term including 6th order difference
+
+```Python
+    h = sp.symbols('h')
+    f1 = te.TaylorExpansion(h, n=6)
+```
+`f + f^(1)*h + f^(2)*h**2/2 + f^(3)*h**3/6 + f^(4)*h**4/24 + f^(5)*h**5/120 + f^(6)*h**6/720 `
+
+#### f(x-h) around x up to term including 7th order difference
+
+```Python
+    h = sp.symbols('h')
+    f_1 = te.TaylorExpansion(-h, n=7)
+```
+
+`f - f^(1)*h + f^(2)*h**2/2 - f^(3)*h**3/6 + f^(4)*h**4/24 - f^(5)*h**5/120 + f^(6)*h**6/720 - f^(7)*h**7/5040`
+
+#### f(x+2h) around x up to term including 4th order difference
+
+```Python
+    h = sp.symbols('h')
+    f2 = te.TaylorExpansion(2*h, n=4)
+```
+`f + 2*f^(1)*h + 2*f^(2)*h**2 + 4*f^(3)*h**3/3 + 2*f^(4)*h**4/3`
+
+### getTrunctaionError
+#### 1st order 3-point central finite difference
+```Python
+    stencil = [-1, 0, 1]
+    err = te.getTruncationError(stencil, 1)
+```
+
+`-f^(3)*h**2/6`
+
+#### 2nd order 3-point central finite difference
+```Python
+    stencil = [-1, 0, 1]
+    err = te.getTruncationError(stencil, 2)
+```
+
+`-f^(4)*h**2/12`
+
+#### 1st order 5-point central finite difference
+```Python
+    stencil = [-2, -1, 0, 1, 2]
+    err = te.getTruncationError(stencil, 1)
+```
+
+`f^(5)*h**4/30`
+
+#### 1st order 3-point central finite difference on the staggered grid
+```Python
+    stencil = [-0.5, 0, 0.5]
+    err = te.getTruncationError(stencil, 1)
+```
+
+`-0.0416666666666667*f^(3)*h**2`
+
+Sympy can not simplify `0.0416666666666667` to `1/24`.
