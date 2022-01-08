@@ -124,6 +124,14 @@ The result is `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*h)`.
 
 The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
+```Python
+    # numerator and denominator
+    stencil = [-2, -1, 0, 1, 2]
+    numr, denom = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=True)
+```
+
+`[1, -8, 0, 8, -1] 12`
+
 #### 7-point 1st order central difference
 ```Python
     stencil = [-3, -2, -1, 0, 1, 2, 3]
@@ -132,6 +140,14 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `[-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]`
 
+```Python
+    # numerator and denominator
+    stencil = [-3, -2, -1, 0, 1, 2, 3]
+    numr, denom = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=True)
+```
+
+`[-1, 9, -45, 0, 45, -9, 1] 60`
+
 #### 3-point 1st order one-sided difference
 ```Python
     stencil = [0, 1, 2]
@@ -139,6 +155,14 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 ```
 
 `[-3/2, 2, -1/2]`
+
+```Python
+    # numerator and denominator
+    stencil = [0, 1, 2]
+    numr, denom = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=True)
+```
+
+`[-3, 4, -1] 2`
 
 #### 4-point 2nd order one-sided difference
 ```Python
