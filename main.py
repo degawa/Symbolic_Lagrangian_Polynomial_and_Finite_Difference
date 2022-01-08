@@ -124,6 +124,12 @@ def main():
         stencil, orderOfDifference=1, as_numr_denom=True)
     print(numr, denom)
 
+    # numerator and denominator of coefficients for 3-point 1st order one-sided difference on staggered grid
+    stencil = [-0.5, 0, 0.5]
+    numr, denom = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1, as_numr_denom=True)
+    print(numr, denom)
+
     # Tayloer expansion of f(x+h) around x up to term including 6th order difference
     h = sp.symbols('h')
     f1 = te.TaylorExpansion(h, n=6)
