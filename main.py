@@ -66,7 +66,7 @@ def main():
     # 5-point 1st order central difference with an user-defined interval symbol
     stencil = [-2, -1, 0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(
-        stencil, orderOfDifference=1, intervalSymbol='dx')
+        stencil, orderOfDifference=1, intervalSymbolStr='dx')
     print(eq)
 
     # 3-point 1st order one-sided difference with a default interval symbol

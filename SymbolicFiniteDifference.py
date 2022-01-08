@@ -1,34 +1,34 @@
 import sympy as sp
 import lagrangianpoly as lp
 
-_DefaultIndependentVariableSymbol = 'x'
-_DefaultIntervalSymbol = 'h'
-_DefaultFunctionSymbol = 'f'
+_DefaultIndependentVariableSymbolStr = 'x'
+_DefaultIntervalSymbolStr = 'h'
+_DefaultFunctionSymbolStr = 'f'
 
 
-def createXSetFromStencil(stencil, intervalSymbol=_DefaultIntervalSymbol):
-    return [stencil[i]*sp.symbols(intervalSymbol) for i in range(len(stencil))]
+def createXSetFromStencil(stencil, intervalSymbolStr=_DefaultIntervalSymbolStr):
+    return [stencil[i]*sp.symbols(intervalSymbolStr) for i in range(len(stencil))]
 
 
-def createSetOfFunctionSymbolsAtXSet(xSet, functionSymbol=_DefaultFunctionSymbol):
-    fSet = sp.symbols(functionSymbol+'_0:{:d}'.format(len(xSet)))
+def createSetOfFunctionSymbolsAtXSet(xSet, functionSymbolStr=_DefaultFunctionSymbolStr):
+    fSet = sp.symbols(functionSymbolStr+'_0:{:d}'.format(len(xSet)))
     return fSet
 
 
 def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
-                                intervalSymbol=_DefaultIntervalSymbol):
-    xSet = createXSetFromStencil(stencil, intervalSymbol)
-    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbol)
+                                intervalSymbolStr=_DefaultIntervalSymbolStr):
+    xSet = createXSetFromStencil(stencil, intervalSymbolStr)
+    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
 
-    x = sp.symbols(_DefaultIndependentVariableSymbol)
+    x = sp.symbols(_DefaultIndependentVariableSymbolStr)
     return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1):
-    xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbol)
-    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbol)
+    xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbolStr)
+    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
 
-    x = sp.symbols(_DefaultIndependentVariableSymbol)
+    x = sp.symbols(_DefaultIndependentVariableSymbolStr)
     num, den = lp.LagrangianPoly(x, xSet, fSet).as_numer_denom()
     num_coef = num.as_poly(fSet).coeffs()
     den_coef = den.as_poly(fSet).coeffs()

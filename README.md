@@ -93,7 +93,7 @@ The result is `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*h)`.
 #### 5-point 1st order central difference with an user-defined interval symbol
 ```Python
     stencil = [-2, -1, 0, 1, 2]
-    eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=1, intervalSymbol='dx')
+    eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=1, intervalSymbolStr='dx')
 ```
 
 `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*dx)`
