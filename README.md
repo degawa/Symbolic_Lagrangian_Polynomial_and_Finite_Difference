@@ -231,6 +231,12 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
     err = te.getTruncationError(stencil, 1)
 ```
 
-`-0.0416666666666667*f^(3)*h**2`
+`-f^(3)*h**2/24`
 
-Sympy can not simplify `0.0416666666666667` to `1/24`.
+#### 1st order 5-point central finite difference on the staggered grid
+```Python
+    stencil = [-1.5, -0.5, 0, 0.5, 1.5]
+    err = te.getTruncationError(stencil, 1)
+```
+
+`3*f^(5)*h**4/640`

@@ -31,5 +31,6 @@ def getTruncationError(stencil, orderOfDifference,
     eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
 
     intervalSymbol = sp.symbols(intervalSymbolStr)
-    return _getDerivativeSymbol(fd._DefaultFunctionSymbolStr, orderOfDifference)\
-        - sp.simplify(eq/intervalSymbol**orderOfDifference)
+    return sp.simplify(_getDerivativeSymbol(fd._DefaultFunctionSymbolStr, orderOfDifference)
+                       - sp.nsimplify(eq/intervalSymbol**orderOfDifference,
+                                      rational=True, tolerance=1e-10))
