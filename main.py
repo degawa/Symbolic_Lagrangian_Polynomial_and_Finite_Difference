@@ -1,5 +1,6 @@
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
 import SymbolicFiniteDifference as fd
+import TaylorExpansion as te
 
 
 def main():
@@ -104,6 +105,41 @@ def main():
     coef = fd.getFiniteDifferenceCoefficients(
         stencil, orderOfDifference=2)
     print(coef)
+
+    # Tayloer expansion of f(x+h) around x up to term including 6th order difference
+    h = sp.symbols('h')
+    f1 = te.TaylorExpansion(h, n=6)
+    print(f1)
+
+    # Tayloer expansion of f(x-h) around x up to term including 7th order difference
+    h = sp.symbols('h')
+    f_1 = te.TaylorExpansion(-h, n=7)
+    print(f_1)
+
+    # Tayloer expansion of f(x+2h) around x up to term including 4th order difference
+    h = sp.symbols('h')
+    f2 = te.TaylorExpansion(2*h, n=4)
+    print(f2)
+
+    # truncation error of 1st order 3-point central finite difference
+    stencil = [-1, 0, 1]
+    err = te.getTruncationError(stencil, 1)
+    print(err)
+
+    # truncation error of 2nd order 3-point central finite difference
+    stencil = [-1, 0, 1]
+    err = te.getTruncationError(stencil, 2)
+    print(err)
+
+    # truncation error of 1st order 5-point central finite difference
+    stencil = [-2, -1, 0, 1, 2]
+    err = te.getTruncationError(stencil, 1)
+    print(err)
+
+    # truncation error of 1st order 3-point central finite difference on the staggered grid
+    stencil = [-0.5, 0, 0.5]
+    err = te.getTruncationError(stencil, 1)
+    print(err)
 
 
 if __name__ == "__main__":
