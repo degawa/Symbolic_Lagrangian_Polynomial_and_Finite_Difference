@@ -1,4 +1,5 @@
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
+import SymbolicFiniteDifference as fd
 
 
 def main():
@@ -55,6 +56,54 @@ def main():
     f_set = sp.symbols('f0:{:d}'.format(len(x_set)))
     eq = Derivative(LagrangianPoly(x, x_set, f_set), x, orderOfDifference=1)
     print(eq)
+
+    # 5-point 1st order central difference with a default interval symbol
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=1)
+    print(eq)
+
+    # 5-point 1st order central difference with an user-defined interval symbol
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=1, intervalSymbol='dx')
+    print(eq)
+
+    # 3-point 1st order one-sided difference with a default interval symbol
+    stencil = [0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=1)
+    print(eq)
+
+    # 4-point 2nd order one-sided difference with a default interval symbol
+    stencil = [0, 1, 2, 3]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=2)
+    print(eq)
+
+    # coefficients for 5-point 1st order central difference
+    stencil = [-2, -1, 0, 1, 2]
+    coef = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1)
+    print(coef)
+
+    # coefficients for 7-point 1st order central difference
+    stencil = [-3, -2, -1, 0, 1, 2, 3]
+    coef = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1)
+    print(coef)
+
+    # coefficients for 3-point 1st order one-sided difference
+    stencil = [0, 1, 2]
+    coef = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1)
+    print(coef)
+
+    # coefficients for 4-point 2nd order one-sided difference
+    stencil = [0, 1, 2, 3]
+    coef = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=2)
+    print(coef)
 
 
 if __name__ == "__main__":
