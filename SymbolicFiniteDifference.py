@@ -10,15 +10,27 @@ def createXSetFromStencil(stencil, intervalSymbolStr=_DefaultIntervalSymbolStr):
     return [stencil[i]*sp.symbols(intervalSymbolStr) for i in range(len(stencil))]
 
 
-def createSetOfFunctionSymbolsAtXSet(xSet, functionSymbolStr=_DefaultFunctionSymbolStr):
-    fSet = sp.symbols(functionSymbolStr+'_0:{:d}'.format(len(xSet)))
+def createSetOfFunctionSymbolsAtXSet(xSet, functionSymbolStr=_DefaultFunctionSymbolStr,
+                                     sameSubscriptsAsStencil=False):
+
+    if sameSubscriptsAsStencil:
+        stencil = [x if x.is_number else sp.poly(x).coeffs()[0] for x in xSet]
+        subscript = ['_{%d}' % i if i.is_integer else '_{%2.1f}' % i
+                     for i in stencil]
+        str = ''.join([functionSymbolStr + s + ' ' for s in subscript])
+        fSet = sp.symbols(str)
+    else:
+        fSet = sp.symbols(functionSymbolStr+'_0:{:d}'.format(len(xSet)))
+
     return fSet
 
 
 def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
-                                intervalSymbolStr=_DefaultIntervalSymbolStr):
+                                intervalSymbolStr=_DefaultIntervalSymbolStr,
+                                sameSubscriptsAsStencil=False):
     xSet = createXSetFromStencil(stencil, intervalSymbolStr)
-    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
+    fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr,
+                                            sameSubscriptsAsStencil)
 
     x = sp.symbols(_DefaultIndependentVariableSymbolStr)
     return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
