@@ -82,6 +82,18 @@ def main():
         stencil, orderOfDifference=2)
     print(eq)
 
+    # 5-point 1st order central difference formula with changing subscripts
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=1, sameSubscriptsAsStencil=True)
+    print(eq)
+
+    # 5-point 1st order central difference formula with changing subscripts
+    stencil = [-1.5, -0.5, 0, 0.5, 1.5]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, orderOfDifference=1, sameSubscriptsAsStencil=True)
+    print(eq)
+
     # coefficients for 5-point 1st order central difference
     stencil = [-2, -1, 0, 1, 2]
     coef = fd.getFiniteDifferenceCoefficients(
