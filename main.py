@@ -106,6 +106,24 @@ def main():
         stencil, orderOfDifference=2)
     print(coef)
 
+    # numerator and denominator of coefficients for 5-point 1st order central difference
+    stencil = [-2, -1, 0, 1, 2]
+    numr, denom = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1, as_numr_denom=True)
+    print(numr, denom)
+
+    # numerator and denominator of coefficients for 7-point 1st order central difference
+    stencil = [-3, -2, -1, 0, 1, 2, 3]
+    numr, denom = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1, as_numr_denom=True)
+    print(numr, denom)
+
+    # numerator and denominator of coefficients for 3-point 1st order one-sided difference
+    stencil = [0, 1, 2]
+    numr, denom = fd.getFiniteDifferenceCoefficients(
+        stencil, orderOfDifference=1, as_numr_denom=True)
+    print(numr, denom)
+
     # Tayloer expansion of f(x+h) around x up to term including 6th order difference
     h = sp.symbols('h')
     f1 = te.TaylorExpansion(h, n=6)

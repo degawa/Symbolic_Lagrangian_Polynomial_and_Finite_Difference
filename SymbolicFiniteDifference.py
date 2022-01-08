@@ -24,7 +24,9 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
     return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
 
 
-def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1):
+def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
+    import numpy as np
+
     xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbolStr)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
 
@@ -36,4 +38,13 @@ def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1):
     coef = [sp.diff(num/den_coef[0], x, orderOfDifference).subs(x, 0)
             for num in num_coef]
 
-    return [c if c.is_number else sp.poly(c).coeffs()[0] for c in coef]
+    coef_num = [c if c.is_number else sp.poly(c).coeffs()[0] for c in coef]
+
+    if as_numr_denom:
+        denom = [c.q for c in coef_num]
+        denom_lcm = np.lcm.reduce(np.array(denom))
+        numr = [c*denom_lcm for c in coef_num]
+
+        return numr, denom_lcm
+    else:
+        return coef_num
