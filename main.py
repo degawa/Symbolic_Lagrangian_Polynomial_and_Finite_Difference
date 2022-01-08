@@ -106,17 +106,17 @@ def main():
         stencil, orderOfDifference=2)
     print(coef)
 
-    # Tayloer expansion of f(x+h) around x up to term including 5th order difference
+    # Tayloer expansion of f(x+h) around x up to term including 6th order difference
     h = sp.symbols('h')
     f1 = te.TaylorExpansion(h, n=6)
     print(f1)
 
-    # Tayloer expansion of f(x-h) around x up to term including 5th order difference
+    # Tayloer expansion of f(x-h) around x up to term including 7th order difference
     h = sp.symbols('h')
     f_1 = te.TaylorExpansion(-h, n=7)
     print(f_1)
 
-    # Tayloer expansion of f(x+2h) around x up to term including 5th order difference
+    # Tayloer expansion of f(x+2h) around x up to term including 4th order difference
     h = sp.symbols('h')
     f2 = te.TaylorExpansion(2*h, n=4)
     print(f2)
