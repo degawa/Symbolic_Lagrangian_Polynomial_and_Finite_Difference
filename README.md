@@ -91,6 +91,14 @@ We get `(-f0 + f2)/dx`.
 
 The result is `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*h)`.
 
+```Python
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(stencil, 1, sameSubscriptsAsStencil=True)
+```
+
+`(-8*f_{-1} + f_{-2} + 8*f_{1} - f_{2})/(12*h)`
+Sorting based on the order of subscripts does not seem to work.
+
 #### 5-point 1st order central difference with an user-defined interval symbol
 ```Python
     stencil = [-2, -1, 0, 1, 2]
