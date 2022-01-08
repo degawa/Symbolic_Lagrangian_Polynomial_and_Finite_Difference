@@ -32,8 +32,10 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr,
                                             sameSubscriptsAsStencil)
 
-    x = sp.symbols(_DefaultIndependentVariableSymbolStr)
-    return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
+    coef = getFiniteDifferenceCoefficients(stencil, orderOfDifference)
+
+    return sp.simplify(sum([coef[i]*fSet[i] for i in range(len(fSet))])
+                       / sp.symbols(intervalSymbolStr)**orderOfDifference)
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
