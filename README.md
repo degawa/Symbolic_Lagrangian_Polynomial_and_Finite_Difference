@@ -10,6 +10,7 @@ import SymbolicFiniteDifference as fd
 ```
 
 # Todo
+- [ ] add comments
 - [ ] add comprehensive test
 - [ ] packaging according to Python manner
 
