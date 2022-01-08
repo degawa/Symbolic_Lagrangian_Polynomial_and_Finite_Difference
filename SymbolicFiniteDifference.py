@@ -25,7 +25,6 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
-    import numpy as np
 
     xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbolStr)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
@@ -41,9 +40,14 @@ def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=
     coef_num = [c if c.is_number else sp.poly(c).coeffs()[0] for c in coef]
 
     if as_numr_denom:
-        denom = [c.q for c in coef_num]
+        import numpy as np
+        import fractions as fr
+        coef_rational = [sp.Rational(fr.Fraction(
+            str(c)).limit_denominator(100000)) for c in coef_num]
+
+        denom = [c.q for c in coef_rational]
         denom_lcm = np.lcm.reduce(np.array(denom))
-        numr = [c*denom_lcm for c in coef_num]
+        numr = [c*denom_lcm for c in coef_rational]
 
         return numr, denom_lcm
     else:
