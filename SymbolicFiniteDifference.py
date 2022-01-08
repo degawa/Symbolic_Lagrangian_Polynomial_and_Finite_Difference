@@ -46,7 +46,7 @@ def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=
     num_coef = num.as_poly(fSet).coeffs()
     den_coef = den.as_poly(fSet).coeffs()
 
-    coef = [sp.diff(num/den_coef[0], x, orderOfDifference).subs(x, 0)
+    coef = [lp.Derivative(num/den_coef[0], x, orderOfDifference)
             for num in num_coef]
 
     coef_num = [c if c.is_number else sp.poly(c).coeffs()[0] for c in coef]
