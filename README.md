@@ -123,6 +123,22 @@ Sorting based on the order of subscripts does not seem to work.
 
 `(2*f_0 - 5*f_1 + 4*f_2 - f_3)/h**2`
 
+#### 5-point 1st order central difference on the staggered grid
+```Python
+    stencil = [-1.5, -0.5, 0, 0.5, 1.5]
+    eq = fd.getFiniteDifferenceEquation(stencil, 1)
+```
+
+The result is `(f_0 - 27*f_1 + 27*f_3 - f_4)/(24*h)`.
+
+```Python
+    stencil = [-1.5, -0.5, 0, 0.5, 1.5]
+    eq = fd.getFiniteDifferenceEquation(stencil, 1, sameSubscriptsAsStencil=True)
+```
+
+`(-27*f_{-0.5} + f_{-1.5} + 27*f_{0.5} - f_{1.5})/(24*h)`
+Sorting based on the order of subscripts does not seem to work.
+
 ### getFiniteDifferenceCoefficients
 #### 5-point 1st order central difference
 ```Python

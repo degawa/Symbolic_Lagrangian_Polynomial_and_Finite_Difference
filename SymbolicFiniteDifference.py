@@ -1,5 +1,4 @@
 import sympy as sp
-import lagrangianpoly as lp
 
 _DefaultIndependentVariableSymbolStr = 'x'
 _DefaultIntervalSymbolStr = 'h'
@@ -32,11 +31,14 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr,
                                             sameSubscriptsAsStencil)
 
-    x = sp.symbols(_DefaultIndependentVariableSymbolStr)
-    return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
+    coef = getFiniteDifferenceCoefficients(stencil, orderOfDifference)
+
+    return sp.simplify(sum([coef[i]*fSet[i] for i in range(len(fSet))])
+                       / sp.symbols(intervalSymbolStr)**orderOfDifference)
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
+    import lagrangianpoly as lp
 
     xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbolStr)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
@@ -46,7 +48,7 @@ def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=
     num_coef = num.as_poly(fSet).coeffs()
     den_coef = den.as_poly(fSet).coeffs()
 
-    coef = [sp.diff(num/den_coef[0], x, orderOfDifference).subs(x, 0)
+    coef = [lp.Derivative(num/den_coef[0], x, orderOfDifference)
             for num in num_coef]
 
     coef_num = [c if c.is_number else sp.poly(c).coeffs()[0] for c in coef]
