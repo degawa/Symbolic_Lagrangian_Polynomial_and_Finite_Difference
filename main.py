@@ -69,13 +69,13 @@ def main():
         stencil, orderOfDifference=1, intervalSymbol='dx')
     print(eq)
 
-    # 3-point one-sided 3-point 1st order central difference with a default interval symbol
+    # 3-point 1st order one-sided difference with a default interval symbol
     stencil = [0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(
         stencil, orderOfDifference=1)
     print(eq)
 
-    # 4-point one-sided 4-point 2nd order central difference with a default interval symbol
+    # 4-point 2nd order one-sided difference with a default interval symbol
     stencil = [0, 1, 2, 3]
     eq = fd.getFiniteDifferenceEquation(
         stencil, orderOfDifference=2)
@@ -93,13 +93,13 @@ def main():
         stencil, orderOfDifference=1)
     print(coef)
 
-    # coefficients for one-sided 3-point 1st order central difference
+    # coefficients for 3-point 1st order one-sided difference
     stencil = [0, 1, 2]
     coef = fd.getFiniteDifferenceCoefficients(
         stencil, orderOfDifference=1)
     print(coef)
 
-    # coefficients for one-sided 4-point 2nd order central difference
+    # coefficients for 4-point 2nd order one-sided difference
     stencil = [0, 1, 2, 3]
     coef = fd.getFiniteDifferenceCoefficients(
         stencil, orderOfDifference=2)
