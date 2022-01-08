@@ -99,7 +99,7 @@ def main():
         stencil, orderOfDifference=1)
     print(coef)
 
-    # coefficients for 4-point one-sided 4-point 2nd order central difference
+    # coefficients for one-sided 4-point 2nd order central difference
     stencil = [0, 1, 2, 3]
     coef = fd.getFiniteDifferenceCoefficients(
         stencil, orderOfDifference=2)
