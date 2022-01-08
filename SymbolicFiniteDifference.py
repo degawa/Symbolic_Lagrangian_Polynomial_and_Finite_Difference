@@ -1,5 +1,4 @@
 import sympy as sp
-import lagrangianpoly as lp
 
 _DefaultIndependentVariableSymbolStr = 'x'
 _DefaultIntervalSymbolStr = 'h'
@@ -39,6 +38,7 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
+    import lagrangianpoly as lp
 
     xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbolStr)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbolStr)
