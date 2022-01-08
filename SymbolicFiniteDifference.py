@@ -24,9 +24,8 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
     return lp.Derivative(lp.LagrangianPoly(x, xSet, fSet), x, orderOfDifference)
 
 
-def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1,
-                                    intervalSymbol=_DefaultIntervalSymbol):
-    xSet = createXSetFromStencil(stencil, intervalSymbol)
+def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1):
+    xSet = createXSetFromStencil(stencil, _DefaultIntervalSymbol)
     fSet = createSetOfFunctionSymbolsAtXSet(xSet, _DefaultFunctionSymbol)
 
     x = sp.symbols(_DefaultIndependentVariableSymbol)
