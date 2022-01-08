@@ -165,6 +165,11 @@ def main():
     err = te.getTruncationError(stencil, 1)
     print(err)
 
+    # truncation error of 1st order 3-point central finite difference on the staggered grid
+    stencil = [-1.5, -0.5, 0, 0.5, 1.5]
+    err = te.getTruncationError(stencil, 1)
+    print(err)
+
 
 if __name__ == "__main__":
     main()
