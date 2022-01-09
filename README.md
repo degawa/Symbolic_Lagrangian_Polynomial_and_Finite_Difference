@@ -249,7 +249,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `f^(5)*h**4/30`
 
-#### 3-point central finite difference on the staggered grid for 1st derivative
+#### 3-point central finite difference for 1st derivative on the staggered grid
 ```Python
     stencil = [-0.5, 0, 0.5]
     err = te.getTruncationError(stencil, 1)
@@ -257,7 +257,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `-f^(3)*h**2/24`
 
-#### 5-point central finite difference on the staggered grid for 1st derivative
+#### 5-point central finite difference for 1st derivative on the staggered grid
 ```Python
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
     err = te.getTruncationError(stencil, 1)
