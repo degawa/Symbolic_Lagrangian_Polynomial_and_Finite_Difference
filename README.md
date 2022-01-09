@@ -51,7 +51,7 @@ f_0\frac{x(x -\varDelta x)}{2\varDelta x^2} - f_1\frac{(x - \varDelta x)(x+\varD
 <img src="https://render.githubusercontent.com/render/math?math=f_0\frac{x(x -\varDelta x)}{2\varDelta x^2} - f_1\frac{(x - \varDelta x)(x+\varDelta x)}{\varDelta x^2} + f_2\frac{x(\varDelta x + x)}{2\varDelta x^2}">
 
 ### Finite Difference Equation
-#### 3-point stencil 1st order central difference on the regular grid
+#### 3-point stencil central difference for 1st derivative on the regular grid
 
 Given a set of data \((x_0, f_0), (x_1, f_1), (x_2, f_2)\) where \((x_0, x_1, x_2) = (-\varDelta x, 0, \varDelta x)\), 3-point stencil 1st order central difference on the regular grid at \(x = 0\), e.g. \(x = x_1\), is constructed by the following script:
 
@@ -68,7 +68,7 @@ We get `(-f0 + f2)/(2*dx)` corresponding to well known expression
 ``` -->
 <img src="https://render.githubusercontent.com/render/math?math=\frac{f_2-f_0}{2\varDelta x}">
 
-#### 3-point stencil 1st order central difference on the staggered grid
+#### 3-point stencil central difference for 1st derivative on the staggered grid
 
 Given a set of data \((x_0, f_0), (x_1, f_1), (x_2, f_2)\) where \((x_0, x_1, x_2) = (\frac{-\varDelta x}{2}, 0, \frac{\varDelta x}{2})\), 3-point stencil 1st order central difference on the staggered grid at \(x = 0\), e.g. \(x = x_1\), is constructed by the following script:
 
@@ -83,7 +83,7 @@ We get `(-f0 + f2)/dx`.
 ## Symbolic Finite Difference
 ### getFiniteDifferenceEquation
 
-#### 5-point 1st order central difference with a default interval symbol
+#### 5-point central difference for 1st derivative with a default interval symbol
 ```Python
     stencil = [-2, -1, 0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=1)
@@ -99,7 +99,7 @@ The result is `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*h)`.
 `(-8*f_{-1} + f_{-2} + 8*f_{1} - f_{2})/(12*h)`
 Sorting based on the order of subscripts does not seem to work.
 
-#### 5-point 1st order central difference with an user-defined interval symbol
+#### 5-point central difference for 1st derivative with an user-defined interval symbol
 ```Python
     stencil = [-2, -1, 0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=1, intervalSymbolStr='dx')
@@ -107,7 +107,7 @@ Sorting based on the order of subscripts does not seem to work.
 
 `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*dx)`
 
-#### 3-point 1st order one-sided difference with a default interval symbol
+#### 3-point one-sided difference for 1st derivative with a default interval symbol
 ```Python
     stencil = [0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=1)
@@ -115,7 +115,7 @@ Sorting based on the order of subscripts does not seem to work.
 
 `(-3*f_0 + 4*f_1 - f_2)/(2*h)`
 
-#### 4-point 2nd order one-sided difference with a default interval symbol
+#### 4-point one-sided difference for 2nd derivative with a default interval symbol
 ```Python
     stencil = [0, 1, 2, 3]
     eq = fd.getFiniteDifferenceEquation(stencil, orderOfDifference=2)
@@ -123,7 +123,7 @@ Sorting based on the order of subscripts does not seem to work.
 
 `(2*f_0 - 5*f_1 + 4*f_2 - f_3)/h**2`
 
-#### 5-point 1st order central difference on the staggered grid
+#### 5-point central difference for 1st derivative on the staggered grid
 ```Python
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
     eq = fd.getFiniteDifferenceEquation(stencil, 1)
@@ -140,7 +140,7 @@ The result is `(f_0 - 27*f_1 + 27*f_3 - f_4)/(24*h)`.
 Sorting based on the order of subscripts does not seem to work.
 
 ### getFiniteDifferenceCoefficients
-#### 5-point 1st order central difference
+#### 5-point central difference for 1st derivative
 ```Python
     stencil = [-2, -1, 0, 1, 2]
     coef = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1)
@@ -156,7 +156,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `[1, -8, 0, 8, -1] 12`
 
-#### 7-point 1st order central difference
+#### 7-point central difference for 1st derivative
 ```Python
     stencil = [-3, -2, -1, 0, 1, 2, 3]
     coef = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1)
@@ -172,7 +172,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `[-1, 9, -45, 0, 45, -9, 1] 60`
 
-#### 3-point 1st order one-sided difference
+#### 3-point one-sided difference for 1st derivative
 ```Python
     stencil = [0, 1, 2]
     coef = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=1)
@@ -188,7 +188,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `[-3, 4, -1] 2`
 
-#### 4-point 2nd order one-sided difference
+#### 4-point one-sided difference for 2nd derivative
 ```Python
     stencil = [0, 1, 2, 3]
     coef = fd.getFiniteDifferenceCoefficients(stencil, orderOfDifference=2)
@@ -225,7 +225,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 `f + 2*f^(1)*h + 2*f^(2)*h**2 + 4*f^(3)*h**3/3 + 2*f^(4)*h**4/3`
 
 ### getTrunctaionError
-#### 1st order 3-point central finite difference
+#### 3-point central finite difference for 1st derivative
 ```Python
     stencil = [-1, 0, 1]
     err = te.getTruncationError(stencil, 1)
@@ -233,7 +233,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `-f^(3)*h**2/6`
 
-#### 2nd order 3-point central finite difference
+#### 3-point central finite difference for 2nd derivative
 ```Python
     stencil = [-1, 0, 1]
     err = te.getTruncationError(stencil, 2)
@@ -241,7 +241,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `-f^(4)*h**2/12`
 
-#### 1st order 5-point central finite difference
+#### 5-point central finite difference for 1st derivative
 ```Python
     stencil = [-2, -1, 0, 1, 2]
     err = te.getTruncationError(stencil, 1)
@@ -249,7 +249,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `f^(5)*h**4/30`
 
-#### 1st order 3-point central finite difference on the staggered grid
+#### 3-point central finite difference on the staggered grid for 1st derivative
 ```Python
     stencil = [-0.5, 0, 0.5]
     err = te.getTruncationError(stencil, 1)
@@ -257,7 +257,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 
 `-f^(3)*h**2/24`
 
-#### 1st order 5-point central finite difference on the staggered grid
+#### 5-point central finite difference on the staggered grid for 1st derivative
 ```Python
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
     err = te.getTruncationError(stencil, 1)
