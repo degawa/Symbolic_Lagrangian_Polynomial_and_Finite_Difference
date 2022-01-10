@@ -2,7 +2,7 @@
 a python script to symbolically construct Lagrange polynomials and finite difference equations
 
 # Usage
-donwload lagrangianpoly.py, SymbolicFiniteDifference.py, and TaylorExpansion.py and import those like below:
+donwload lagrangianpoly.py, SymbolicFiniteDifference.py, SymbolicInterpolation.py, and TaylorExpansion.py and import those like below:
 
 ```Python
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
