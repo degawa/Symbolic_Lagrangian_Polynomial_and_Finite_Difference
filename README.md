@@ -264,3 +264,92 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 ```
 
 `3*f^(5)*h**4/640`
+
+## Interpolation
+### getInterpolationEquation
+#### 2-point central interpolation
+```Python
+    stencil = [-1, 1]
+    eq = intp.getInterpolationEquation(stencil)
+    print(eq)
+```
+`f_0/2 + f_1/2`
+
+#### 4-point central interpolation
+```Python
+    stencil = [-2, -1, 1, 2]
+    eq = intp.getInterpolationEquation(stencil)
+    print(eq)
+```
+`-f_0/6 + 2*f_1/3 + 2*f_2/3 - f_3/6`
+
+### getIntepolationCoefficients
+#### 2-point central interpolation
+```Python
+    stencil = [-1, 1]
+    coef = intp.getInterpolationCoefficients(stencil)
+    print(coef)
+```
+`[1/2, 1/2]`
+
+```Python
+    stencil = [-1, 1]
+    numr, denom = intp.getInterpolationCoefficients(stencil, as_numr_denom=True)
+    print(numr, denom)
+```
+`[1, 1] 2`
+
+#### 4-point central interpolation
+```Python
+    stencil = [-2, -1, 1, 2]
+    coef = intp.getInterpolationCoefficients(stencil)
+    print(coef)
+```
+`[-1/6, 2/3, 2/3, -1/6]`
+
+```Python
+    stencil = [-2, -1, 1, 2]
+    numr, denom = intp.getInterpolationCoefficients(stencil, as_numr_denom=True)
+    print(numr, denom)
+```
+`[-1, 4, 4, -1] 6`
+
+### getTruncationErrorOfIntepolationEquation
+#### 2-point central interpolation
+```Python
+    stencil = [-1, 1]
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(err)
+```
+`-f^(2)*h**2/2`
+
+#### 4-point central interpolation
+```Python
+    stencil = [-2, -1, 1, 2]
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(err)
+```
+`f^(4)*h**4/6`
+
+### Extrapolation
+#### linear extrapolation
+```Python
+    stencil = [1, 2]
+    eq = intp.getInterpolationEquation(stencil)
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(eq)
+    print(err)
+```
+`2*f_0 - f_1`
+`f^(2)*h**2`
+
+#### quadratic extrapolation
+```Python
+    stencil = [1, 2, 3]
+    eq = intp.getInterpolationEquation(stencil)
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(eq)
+    print(err)
+```
+`3*f_0 - 3*f_1 + f_2`
+`-f^(3)*h**3`

@@ -1,5 +1,6 @@
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
 import SymbolicFiniteDifference as fd
+import SymbolicInterpolation as intp
 import TaylorExpansion as te
 
 
@@ -181,6 +182,64 @@ def main():
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
     err = te.getTruncationError(stencil, 1)
     print(err)
+
+    # 2-point central interpolation
+    stencil = [-1, 1]
+    eq = intp.getInterpolationEquation(stencil)
+    print(eq)
+
+    # 4-point central interpolation
+    stencil = [-2, -1, 1, 2]
+    eq = intp.getInterpolationEquation(stencil)
+    print(eq)
+
+    # coefficients for 2-point central interpolation
+    stencil = [-1, 1]
+    coef = intp.getInterpolationCoefficients(stencil)
+    print(coef)
+
+    # coefficients for 4-point central interpolation
+    stencil = [-2, -1, 1, 2]
+    coef = intp.getInterpolationCoefficients(stencil)
+    print(coef)
+
+    # numerator and denominator of coefficients for 2-point central interpolation
+    stencil = [-1, 1]
+    numr, denom = intp.getInterpolationCoefficients(
+        stencil, as_numr_denom=True)
+    print(numr, denom)
+
+    # numerator and denominator of coefficients for 4-point central interpolation
+    stencil = [-2, -1, 1, 2]
+    numr, denom = intp.getInterpolationCoefficients(
+        stencil, as_numr_denom=True)
+    print(numr, denom)
+
+    # truncation error of 2-point central interpolation
+    stencil = [-1, 1]
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(err)
+
+    # truncation error of 4-point central interpolation
+    stencil = [-2, -1, 1, 2]
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(err)
+
+    # linear extrapolation
+    stencil = [1, 2]
+    eq = intp.getInterpolationEquation(stencil)
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(eq)
+    print(err)
+
+    # quadratic extrapolation
+    stencil = [1, 2, 3]
+    eq = intp.getInterpolationEquation(stencil)
+    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    print(eq)
+    print(err)
+
+    return
 
 
 if __name__ == "__main__":
