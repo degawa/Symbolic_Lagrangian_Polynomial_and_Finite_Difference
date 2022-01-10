@@ -7,6 +7,7 @@ donwload lagrangianpoly.py, SymbolicFiniteDifference.py, and TaylorExpansion.py 
 ```Python
 from lagrangianpoly import LagrangianBasis, LagrangianPoly, Derivative
 import SymbolicFiniteDifference as fd
+import SymbolicInterpolation as intp
 import TaylorExpansion as te
 ```
 
@@ -228,7 +229,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 3-point central finite difference for 1st derivative
 ```Python
     stencil = [-1, 0, 1]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
 ```
 
 `-f^(3)*h**2/6`
@@ -236,7 +237,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 3-point central finite difference for 2nd derivative
 ```Python
     stencil = [-1, 0, 1]
-    err = te.getTruncationError(stencil, 2)
+    err = fd.getTruncationError(stencil, 2)
 ```
 
 `-f^(4)*h**2/12`
@@ -244,7 +245,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 5-point central finite difference for 1st derivative
 ```Python
     stencil = [-2, -1, 0, 1, 2]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
 ```
 
 `f^(5)*h**4/30`
@@ -252,7 +253,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 3-point central finite difference for 1st derivative on the staggered grid
 ```Python
     stencil = [-0.5, 0, 0.5]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
 ```
 
 `-f^(3)*h**2/24`
@@ -260,7 +261,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 5-point central finite difference for 1st derivative on the staggered grid
 ```Python
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
 ```
 
 `3*f^(5)*h**4/640`
@@ -318,7 +319,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 2-point central interpolation
 ```Python
     stencil = [-1, 1]
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(err)
 ```
 `-f^(2)*h**2/2`
@@ -326,7 +327,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 #### 4-point central interpolation
 ```Python
     stencil = [-2, -1, 1, 2]
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(err)
 ```
 `f^(4)*h**4/6`
@@ -336,7 +337,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 ```Python
     stencil = [1, 2]
     eq = intp.getInterpolationEquation(stencil)
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(eq)
     print(err)
 ```
@@ -347,7 +348,7 @@ The result is `[1/12, -2/3, 0, 2/3, -1/12]`.
 ```Python
     stencil = [1, 2, 3]
     eq = intp.getInterpolationEquation(stencil)
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(eq)
     print(err)
 ```

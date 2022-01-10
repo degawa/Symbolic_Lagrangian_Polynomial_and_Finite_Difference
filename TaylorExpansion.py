@@ -1,6 +1,5 @@
 import sympy as sp
 import utils as util
-import SymbolicFiniteDifference as fd
 
 
 def TaylorExpansion(h, n):
@@ -18,39 +17,3 @@ def TaylorExpansion(h, n):
 
 def _getDerivativeSymbol(functionSymbolStr, n):
     return sp.symbols(functionSymbolStr+"^(%d)" % n)
-
-
-def getTruncationError(stencil, orderOfDifference,
-                       intervalSymbolStr=util._DefaultIntervalSymbolStr):
-    xSet = util.createXSetFromStencil(
-        stencil, intervalSymbolStr=intervalSymbolStr)
-
-    coef = fd.getFiniteDifferenceCoefficients(xSet, orderOfDifference)
-
-    num_expterm = len(xSet)+orderOfDifference
-    f_te = [TaylorExpansion(x, num_expterm) for x in xSet]
-
-    eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
-
-    intervalSymbol = sp.symbols(intervalSymbolStr)
-    return sp.simplify(_getDerivativeSymbol(util._DefaultFunctionSymbolStr, orderOfDifference)
-                       - sp.nsimplify(eq/intervalSymbol**orderOfDifference,
-                                      rational=True, tolerance=1e-10))
-
-
-def getTruncationErrorOfInterpolationEquation(stencil,
-                                              intervalSymbolStr=util._DefaultIntervalSymbolStr):
-    import SymbolicInterpolation as intp
-    xSet = util.createXSetFromStencil(
-        stencil, intervalSymbolStr=intervalSymbolStr)
-
-    coef = intp.getInterpolationCoefficients(stencil)
-
-    num_expterm = len(xSet)
-    f_te = [TaylorExpansion(x, num_expterm) for x in xSet]
-
-    eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
-
-    return sp.simplify(sp.symbols(util._DefaultFunctionSymbolStr)
-                       - sp.nsimplify(eq,
-                                      rational=True, tolerance=1e-10))

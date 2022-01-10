@@ -31,3 +31,22 @@ def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=
             for num in num_coef]
 
     return util.simplifyCoefficients(coef, as_numr_denom)
+
+
+def getTruncationError(stencil, orderOfDifference,
+                       intervalSymbolStr=util._DefaultIntervalSymbolStr):
+    import TaylorExpansion as te
+    xSet = util.createXSetFromStencil(
+        stencil, intervalSymbolStr=intervalSymbolStr)
+
+    coef = getFiniteDifferenceCoefficients(xSet, orderOfDifference)
+
+    num_expterm = len(xSet)+orderOfDifference
+    f_te = [te.TaylorExpansion(x, num_expterm) for x in xSet]
+
+    eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
+
+    intervalSymbol = sp.symbols(intervalSymbolStr)
+    return sp.simplify(te._getDerivativeSymbol(util._DefaultFunctionSymbolStr, orderOfDifference)
+                       - sp.nsimplify(eq/intervalSymbol**orderOfDifference,
+                                      rational=True, tolerance=1e-10))

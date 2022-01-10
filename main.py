@@ -160,27 +160,27 @@ def main():
 
     # truncation error of 3-point central finite difference for 1st derivative
     stencil = [-1, 0, 1]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
     print(err)
 
     # truncation error of 3-point central finite difference for 2nd derivative
     stencil = [-1, 0, 1]
-    err = te.getTruncationError(stencil, 2)
+    err = fd.getTruncationError(stencil, 2)
     print(err)
 
     # truncation error of 5-point central finite difference for 1st derivative
     stencil = [-2, -1, 0, 1, 2]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
     print(err)
 
     # truncation error of 3-point central finite difference for 1st dervative on the staggered grid
     stencil = [-0.5, 0, 0.5]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
     print(err)
 
     # truncation error of 3-point central finite difference for 1st derivative on the staggered grid
     stencil = [-1.5, -0.5, 0, 0.5, 1.5]
-    err = te.getTruncationError(stencil, 1)
+    err = fd.getTruncationError(stencil, 1)
     print(err)
 
     # 2-point central interpolation
@@ -217,25 +217,25 @@ def main():
 
     # truncation error of 2-point central interpolation
     stencil = [-1, 1]
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(err)
 
     # truncation error of 4-point central interpolation
     stencil = [-2, -1, 1, 2]
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(err)
 
     # linear extrapolation
     stencil = [1, 2]
     eq = intp.getInterpolationEquation(stencil)
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(eq)
     print(err)
 
     # quadratic extrapolation
     stencil = [1, 2, 3]
     eq = intp.getInterpolationEquation(stencil)
-    err = te.getTruncationErrorOfInterpolationEquation(stencil)
+    err = intp.getTruncationError(stencil)
     print(eq)
     print(err)
 
