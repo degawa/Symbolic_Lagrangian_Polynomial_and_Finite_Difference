@@ -198,7 +198,7 @@ def main():
     coef = intp.getInterpolationCoefficients(stencil)
     print(coef)
 
-    # coefficients 4-point central interpolation
+    # coefficients for 4-point central interpolation
     stencil = [-2, -1, 1, 2]
     coef = intp.getInterpolationCoefficients(stencil)
     print(coef)
