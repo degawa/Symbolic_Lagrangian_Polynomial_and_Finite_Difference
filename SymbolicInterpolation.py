@@ -2,6 +2,17 @@ import sympy as sp
 import utils as util
 
 
+def getInterpolationEquation(stencil,
+                             sameSubscriptsAsStencil=False):
+    xSet = util.createXSetFromStencil(stencil, util._DefaultIntervalSymbolStr)
+    fSet = util.createSetOfFunctionSymbolsAtXSet(xSet, util._DefaultFunctionSymbolStr,
+                                                 sameSubscriptsAsStencil)
+
+    coef = getInterpolationCoefficients(stencil)
+
+    return sp.simplify(sum([coef[i]*fSet[i] for i in range(len(fSet))]))
+
+
 def getInterpolationCoefficients(stencil, as_numr_denom=False):
     import lagrangianpoly as lp
 
