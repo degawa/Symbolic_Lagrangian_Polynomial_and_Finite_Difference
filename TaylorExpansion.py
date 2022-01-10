@@ -36,3 +36,21 @@ def getTruncationError(stencil, orderOfDifference,
     return sp.simplify(_getDerivativeSymbol(util._DefaultFunctionSymbolStr, orderOfDifference)
                        - sp.nsimplify(eq/intervalSymbol**orderOfDifference,
                                       rational=True, tolerance=1e-10))
+
+
+def getTruncationErrorOfInterpolationEquation(stencil,
+                                              intervalSymbolStr=util._DefaultIntervalSymbolStr):
+    import SymbolicInterpolation as intp
+    xSet = util.createXSetFromStencil(
+        stencil, intervalSymbolStr=intervalSymbolStr)
+
+    coef = intp.getInterpolationCoefficients(stencil)
+
+    num_expterm = len(xSet)
+    f_te = [TaylorExpansion(x, num_expterm) for x in xSet]
+
+    eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
+
+    return sp.simplify(sp.symbols(util._DefaultFunctionSymbolStr)
+                       - sp.nsimplify(eq,
+                                      rational=True, tolerance=1e-10))
