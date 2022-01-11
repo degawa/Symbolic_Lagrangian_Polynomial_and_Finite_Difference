@@ -100,6 +100,13 @@ The result is `(f_0 - 8*f_1 + 8*f_3 - f_4)/(12*h)`.
 `(-8*f_{-1} + f_{-2} + 8*f_{1} - f_{2})/(12*h)`
 Sorting based on the order of subscripts does not seem to work.
 
+```Python
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(stencil, 1, sameSubscriptsAsStencil=True, evaluate=False)
+```
+
+`(f_{-2} - 8*f_{-1} + 0*f_{0} + 8*f_{1} - f_{2})/(12*h)`
+
 #### 5-point central difference for 1st derivative with an user-defined interval symbol
 ```Python
     stencil = [-2, -1, 0, 1, 2]

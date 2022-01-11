@@ -4,15 +4,23 @@ import utils as util
 
 def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
                                 intervalSymbolStr=util._DefaultIntervalSymbolStr,
-                                sameSubscriptsAsStencil=False):
+                                sameSubscriptsAsStencil=False,
+                                evaluate=True):
     xSet = util.createXSetFromStencil(stencil, intervalSymbolStr)
     fSet = util.createSetOfFunctionSymbolsAtXSet(xSet, util._DefaultFunctionSymbolStr,
                                                  sameSubscriptsAsStencil)
 
-    coef = getFiniteDifferenceCoefficients(stencil, orderOfDifference)
+    if evaluate:
+        coef = getFiniteDifferenceCoefficients(stencil, orderOfDifference)
+        eq = sp.simplify(sum([coef[i]*fSet[i] for i in range(len(fSet))])
+                         / sp.symbols(intervalSymbolStr)**orderOfDifference)
+    else:
+        numr, denom = getFiniteDifferenceCoefficients(
+            stencil, orderOfDifference, as_numr_denom=True)
+        eq = util.div(util.dotproduct_no_eval(numr, fSet), denom*sp.symbols(
+            intervalSymbolStr)**orderOfDifference)
 
-    return sp.simplify(sum([coef[i]*fSet[i] for i in range(len(fSet))])
-                       / sp.symbols(intervalSymbolStr)**orderOfDifference)
+    return eq
 
 
 def getFiniteDifferenceCoefficients(stencil, orderOfDifference=1, as_numr_denom=False):
