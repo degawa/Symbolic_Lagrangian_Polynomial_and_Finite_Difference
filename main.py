@@ -65,6 +65,12 @@ def main():
         stencil, orderOfDifference=1)
     print(eq)
 
+    # 5-point central difference for 1st derivative with a default interval symbol
+    stencil = [-2, -1, 0, 1, 2]
+    eq = fd.getFiniteDifferenceEquation(
+        stencil, 1, sameSubscriptsAsStencil=True, evaluate=False)
+    print(eq)
+
     # 5-point central difference for 1sit derivative with an user-defined interval symbol
     stencil = [-2, -1, 0, 1, 2]
     eq = fd.getFiniteDifferenceEquation(
