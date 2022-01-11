@@ -53,3 +53,6 @@ def dotproduct_no_eval(numr, fSet):
 
     return eq
 
+
+def div(eq, denom):
+    return sp.Mul(eq, 1/denom)
