@@ -48,7 +48,7 @@ def getTruncationError(stencil,
 
     eq = sum([coef[i]*f_te[i] for i in range(len(xSet))])
 
-    return sp.simplify(sp.symbols(util._DefaultFunctionSymbolStr)
+    return sp.expand(sp.simplify(sp.symbols(util._DefaultFunctionSymbolStr)
                        - sp.nsimplify(eq,
                                       rational=True,
-                                      tolerance=1e-10)).as_leading_term()
+                                      tolerance=1e-10))).as_leading_term()
