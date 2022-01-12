@@ -6,7 +6,7 @@ def LagrangianBasis(x, degreeOfPolynomial, pointAt, xSet=None):
 
     numDataSet = degreeOfPolynomial+1
 
-    if xSet == None:
+    if xSet is None:
         xSet = sp.symbols('x0:{:d}'.format(numDataSet))
 
     index = list(range(numDataSet))
