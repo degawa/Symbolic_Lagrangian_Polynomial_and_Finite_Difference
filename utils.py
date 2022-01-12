@@ -43,13 +43,13 @@ def simplifyCoefficients(coef, as_numr_denom):
         return [n/denom_lcm for n in numr]
 
 
-def dotproduct_no_eval(numr, fSet):
+def dot_product(numr, fSet, evaluate=False):
     idx_start = len(fSet)-1
     idx_end = -1
-    eq = sp.Mul(numr[idx_start], fSet[idx_start], evaluate=False)
+    eq = sp.Mul(numr[idx_start], fSet[idx_start], evaluate=evaluate)
     for i in range(idx_start-1, idx_end, -1):
         eq = sp.Add(eq, sp.Mul(numr[i], fSet[i],
-                               evaluate=False), evaluate=False)
+                               evaluate=evaluate), evaluate=evaluate)
 
     return eq
 

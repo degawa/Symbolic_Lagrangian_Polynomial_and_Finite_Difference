@@ -17,7 +17,7 @@ def getFiniteDifferenceEquation(stencil, orderOfDifference=1,
     else:
         numr, denom = getFiniteDifferenceCoefficients(
             stencil, orderOfDifference, as_numr_denom=True)
-        eq = util.div(util.dotproduct_no_eval(numr, fSet), denom*sp.symbols(
+        eq = util.div(util.dot_product(numr, fSet), denom*sp.symbols(
             intervalSymbolStr)**orderOfDifference)
 
     return eq
