@@ -50,4 +50,5 @@ def getTruncationError(stencil,
 
     return sp.simplify(sp.symbols(util._DefaultFunctionSymbolStr)
                        - sp.nsimplify(eq,
-                                      rational=True, tolerance=1e-10))
+                                      rational=True,
+                                      tolerance=1e-10)).as_leading_term()
