@@ -1,6 +1,8 @@
 # Symbolic Constructor for Lagrangian Polynomial and Finite Difference
 a python script to symbolically construct Lagrange polynomials and finite difference equations
 
+**This project is moved to another project [dictos](https://github.com/degawa/dictos)**.
+
 # Usage
 donwload lagrangianpoly.py, SymbolicFiniteDifference.py, SymbolicInterpolation.py, and TaylorExpansion.py and import those like below:
 
